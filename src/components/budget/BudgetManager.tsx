@@ -465,7 +465,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
               placeholder="e.g. Cocktail Hour Canapes, Drone Videographer"
               value={newItem.name}
               onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 
@@ -477,7 +477,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
               <select
                 value={newItem.category}
                 onChange={(e) => setNewItem({ ...newItem, category: e.target.value as BudgetCategory })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               >
                 {Object.entries(CATEGORY_LABELS).map(([key, label]) => (
                   <option key={key} value={key}>
@@ -494,7 +494,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
               <select
                 value={newItem.priority}
                 onChange={(e) => setNewItem({ ...newItem, priority: e.target.value as any })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               >
                 <option value="must-have">Must-Have</option>
                 <option value="nice-to-have">Nice-To-Have</option>
@@ -514,7 +514,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
                 required
                 value={newItem.estimatedCost || ''}
                 onChange={(e) => setNewItem({ ...newItem, estimatedCost: parseFloat(e.target.value) || 0 })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               />
             </div>
 
@@ -527,7 +527,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
                 min="0"
                 value={newItem.actualCost || ''}
                 onChange={(e) => setNewItem({ ...newItem, actualCost: parseFloat(e.target.value) || 0 })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               />
             </div>
           </div>
@@ -541,7 +541,7 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
               placeholder="e.g. 50% deposit required on booking, includes tip"
               value={newItem.notes}
               onChange={(e) => setNewItem({ ...newItem, notes: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 

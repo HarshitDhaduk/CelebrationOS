@@ -415,7 +415,7 @@ ${event.title}`;
               <select
                 value={rfpCategory}
                 onChange={(e) => setRfpCategory(e.target.value as BudgetCategory)}
-                className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               >
                 {Object.entries(CATEGORY_LABELS).map(([k, l]) => (
                   <option key={k} value={k}>
@@ -434,7 +434,7 @@ ${event.title}`;
                 value={rfpVendorName}
                 onChange={(e) => setRfpVendorName(e.target.value)}
                 placeholder="e.g. Apex Catering Team"
-                className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
               />
             </div>
 
@@ -446,7 +446,7 @@ ${event.title}`;
                 type="number"
                 value={rfpTargetBudget}
                 onChange={(e) => setRfpTargetBudget(parseFloat(e.target.value) || 0)}
-                className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               />
             </div>
           </div>
@@ -518,7 +518,7 @@ ${event.title}`;
               placeholder="e.g. Pacific Coast Florals, DJ Nexus"
               value={newVendor.name}
               onChange={(e) => setNewVendor({ ...newVendor, name: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 
@@ -530,7 +530,7 @@ ${event.title}`;
               <select
                 value={newVendor.category}
                 onChange={(e) => setNewVendor({ ...newVendor, category: e.target.value as BudgetCategory })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               >
                 {Object.entries(CATEGORY_LABELS).map(([k, l]) => (
                   <option key={k} value={k}>
@@ -547,7 +547,7 @@ ${event.title}`;
               <select
                 value={newVendor.status}
                 onChange={(e) => setNewVendor({ ...newVendor, status: e.target.value as VendorStatus })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               >
                 <option value="researching">Researching</option>
                 <option value="contacted">Contacted</option>
@@ -568,7 +568,7 @@ ${event.title}`;
                 placeholder="e.g. Maria Chen"
                 value={newVendor.contactPerson}
                 onChange={(e) => setNewVendor({ ...newVendor, contactPerson: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
               />
             </div>
 
@@ -581,7 +581,7 @@ ${event.title}`;
                 placeholder="e.g. (555) 234-5678"
                 value={newVendor.phone}
                 onChange={(e) => setNewVendor({ ...newVendor, phone: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
               />
             </div>
           </div>
@@ -595,7 +595,7 @@ ${event.title}`;
               placeholder="e.g. booking@pacificflorals.com"
               value={newVendor.email}
               onChange={(e) => setNewVendor({ ...newVendor, email: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 
@@ -609,7 +609,7 @@ ${event.title}`;
                 min="0"
                 value={newVendor.quotedPrice || ''}
                 onChange={(e) => setNewVendor({ ...newVendor, quotedPrice: parseFloat(e.target.value) || 0 })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               />
             </div>
 
@@ -622,7 +622,7 @@ ${event.title}`;
                 min="0"
                 value={newVendor.depositPaid || ''}
                 onChange={(e) => setNewVendor({ ...newVendor, depositPaid: parseFloat(e.target.value) || 0 })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               />
             </div>
           </div>
@@ -670,7 +670,7 @@ ${event.title}`;
               placeholder="e.g. Confirm generator wattage with venue manager"
               value={newChecklistItem.title}
               onChange={(e) => setNewChecklistItem({ ...newChecklistItem, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 
@@ -681,7 +681,7 @@ ${event.title}`;
             <select
               value={newChecklistItem.vendorCategory}
               onChange={(e) => setNewChecklistItem({ ...newChecklistItem, vendorCategory: e.target.value as BudgetCategory })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
             >
               {Object.entries(CATEGORY_LABELS).map(([k, l]) => (
                 <option key={k} value={k}>
@@ -700,7 +700,7 @@ ${event.title}`;
               placeholder="e.g. Verify sound level meter restrictions for outdoor amps."
               value={newChecklistItem.description}
               onChange={(e) => setNewChecklistItem({ ...newChecklistItem, description: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 

@@ -56,7 +56,7 @@ export const Modal: React.FC<ModalProps> = ({
 
       {/* Modal Dialog */}
       <div
-        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden transform transition-all z-10 my-8`}
+        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden transform transition-all z-10 my-8`}
         role="dialog"
         aria-modal="true"
       >

@@ -6,6 +6,19 @@
   body {
     @apply antialiased selection:bg-rose-500 selection:text-white font-sans;
   }
+  input,
+  select,
+  textarea {
+    @apply text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500;
+  }
+  input[type="date"],
+  input[type="time"] {
+    color-scheme: light;
+  }
+  .dark input[type="date"],
+  .dark input[type="time"] {
+    color-scheme: dark;
+  }
 }
 
 /* Custom subtle scrollbars */

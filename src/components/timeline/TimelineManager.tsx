@@ -410,7 +410,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
               placeholder="e.g. First Dance & Welcome Toast, Cake Cutting"
               value={newScheduleItem.title}
               onChange={(e) => setNewScheduleItem({ ...newScheduleItem, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 
@@ -424,7 +424,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
                 required
                 value={newScheduleItem.startTime}
                 onChange={(e) => setNewScheduleItem({ ...newScheduleItem, startTime: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               />
             </div>
 
@@ -436,7 +436,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
                 type="time"
                 value={newScheduleItem.endTime}
                 onChange={(e) => setNewScheduleItem({ ...newScheduleItem, endTime: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               />
             </div>
           </div>
@@ -451,7 +451,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
                 placeholder="e.g. Lead DJ, Maid of Honor, Caterer"
                 value={newScheduleItem.responsibleParty}
                 onChange={(e) => setNewScheduleItem({ ...newScheduleItem, responsibleParty: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
               />
             </div>
 
@@ -464,7 +464,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
                 placeholder="e.g. Lawn Altar, Dining Pavilion, Rooftop"
                 value={newScheduleItem.location}
                 onChange={(e) => setNewScheduleItem({ ...newScheduleItem, location: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
               />
             </div>
           </div>
@@ -478,7 +478,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
               placeholder="e.g. Cue acoustic track #4 as doors open; ensure wireless mic is ready."
               value={newScheduleItem.description}
               onChange={(e) => setNewScheduleItem({ ...newScheduleItem, description: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 
@@ -512,7 +512,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
               placeholder="e.g. Mail formal invitations, Finalize floral contract"
               value={newMilestone.title}
               onChange={(e) => setNewMilestone({ ...newMilestone, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 
@@ -524,7 +524,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
               <select
                 value={newMilestone.phase}
                 onChange={(e) => setNewMilestone({ ...newMilestone, phase: e.target.value as any })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               >
                 {PHASE_ORDER.map((pk) => (
                   <option key={pk} value={pk}>
@@ -542,7 +542,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
                 type="date"
                 value={newMilestone.dueDate}
                 onChange={(e) => setNewMilestone({ ...newMilestone, dueDate: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               />
             </div>
           </div>
@@ -555,7 +555,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
               <select
                 value={newMilestone.priority}
                 onChange={(e) => setNewMilestone({ ...newMilestone, priority: e.target.value as any })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               >
                 <option value="high">High Priority</option>
                 <option value="medium">Medium Priority</option>
@@ -572,7 +572,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
                 placeholder="e.g. Elena, Alex, Committee"
                 value={newMilestone.assignedTo}
                 onChange={(e) => setNewMilestone({ ...newMilestone, assignedTo: e.target.value })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
               />
             </div>
           </div>

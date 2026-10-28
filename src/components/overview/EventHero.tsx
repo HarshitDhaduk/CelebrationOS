@@ -187,7 +187,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
               required
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 
@@ -201,7 +201,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
                 value={formData.subType || ''}
                 onChange={(e) => setFormData({ ...formData, subType: e.target.value })}
                 placeholder="e.g. Coastal Wedding, Sweet 16, 5K Charity"
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
               />
             </div>
 
@@ -215,13 +215,13 @@ export const EventHero: React.FC<EventHeroProps> = ({
                   required
                   value={formData.date}
                   onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                  className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
                 />
                 <input
                   type="time"
                   value={formData.time || '16:00'}
                   onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                  className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                  className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
                 />
               </div>
             </div>
@@ -238,7 +238,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
                 required
                 value={formData.guestCount}
                 onChange={(e) => setFormData({ ...formData, guestCount: parseInt(e.target.value, 10) || 1 })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               />
             </div>
 
@@ -252,7 +252,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
                 required
                 value={formData.totalBudget}
                 onChange={(e) => setFormData({ ...formData, totalBudget: parseFloat(e.target.value) || 0 })}
-                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               />
             </div>
           </div>
@@ -266,7 +266,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
               required
               value={formData.location}
               onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 
@@ -278,7 +278,7 @@ export const EventHero: React.FC<EventHeroProps> = ({
               rows={2}
               value={formData.vibe}
               onChange={(e) => setFormData({ ...formData, vibe: e.target.value })}
-              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none"
+              className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
             />
           </div>
 
