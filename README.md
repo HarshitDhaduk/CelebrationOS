@@ -2,12 +2,12 @@
 ### *The GenAI-Powered Event & Celebration Operating System*
 **Google PromptWars — Challenge 5: Celebration & Event Planner**
 
-[![CI/CD - Build, Test & Deploy](https://github.com/HarshitDhaduk/Google-PromptWars-Challenge-5/actions/workflows/deploy.yml/badge.svg)](https://github.com/HarshitDhaduk/Google-PromptWars-Challenge-5/actions/workflows/deploy.yml)
-[![Tests](https://img.shields.io/badge/tests-9%2F9%20passed-emerald)](https://github.com/HarshitDhaduk/Google-PromptWars-Challenge-5)
+[![CI/CD - Build, Test & Deploy](https://github.com/HarshitDhaduk/CelebrationOS/actions/workflows/deploy.yml/badge.svg)](https://github.com/HarshitDhaduk/CelebrationOS/actions/workflows/deploy.yml)
+[![Tests](https://img.shields.io/badge/tests-9%2F9%20passed-emerald)](https://github.com/HarshitDhaduk/CelebrationOS)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Framework: React 19 + TypeScript](https://img.shields.io/badge/Frontend-React%2019%20%2B%20TypeScript-rose)](https://react.dev/)
 [![Engine: Google Gemini 2.5](https://img.shields.io/badge/AI-Google%20Gemini%202.5-amber)](https://ai.google.dev/)
-[![Repo Size](https://img.shields.io/badge/repo%20size-%3C%201MB%20(limit%2010MB)-success)](https://github.com/HarshitDhaduk/Google-PromptWars-Challenge-5)
+[![Repo Size](https://img.shields.io/badge/repo%20size-%3C%201MB%20(limit%2010MB)-success)](https://github.com/HarshitDhaduk/CelebrationOS)
 
 ---
 
@@ -124,8 +124,8 @@ npm test
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/HarshitDhaduk/Google-PromptWars-Challenge-5.git
-cd Google-PromptWars-Challenge-5
+git clone https://github.com/HarshitDhaduk/CelebrationOS.git
+cd CelebrationOS
 
 # 2. Install dependencies
 npm install
@@ -147,8 +147,8 @@ npm run build
 | Field | Submission Value |
 |---|---|
 | **Challenge** | [Challenge 5] Celebration & Event Planner |
-| **Public GitHub Repo** | `https://github.com/HarshitDhaduk/Google-PromptWars-Challenge-5` |
-| **Live Deployed Link** | `https://harshitdhaduk.github.io/Google-PromptWars-Challenge-5/` |
+| **Public GitHub Repo** | `https://github.com/HarshitDhaduk/CelebrationOS` |
+| **Live Deployed Link** | `https://harshitdhaduk.github.io/CelebrationOS/` (also `https://harshitdhaduk.github.io/celebration-os/`) |
 | **Branch** | `main` (Single branch rule followed strictly) |
 | **Repo Size** | `< 1 MB` (Strictly under 10 MB requirement) |
 | **GenAI Services Used** | Google Gemini 2.5 Flash for dynamic contextual copilot chat, automated vendor RFP email generation, speech coaching, and intelligent local simulation engine. |

@@ -329,7 +329,7 @@ export default function App() {
               Built with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> by Harshit Dhaduk
             </span>
             <a
-              href="https://github.com/HarshitDhaduk/Google-PromptWars-Challenge-5"
+              href="https://github.com/HarshitDhaduk/CelebrationOS"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 hover:text-slate-800 dark:hover:text-white"
