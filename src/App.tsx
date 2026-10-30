@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useEventProject } from './hooks/useEventProject';
 import { useDarkMode } from './hooks/useDarkMode';
 import { useGeminiApiKey } from './hooks/useGeminiApiKey';
+import { useAccessibilityState } from './hooks/useAccessibilityState';
+import { AccessibilityBar } from './components/common/AccessibilityBar';
 import { Navbar } from './components/layout/Navbar';
 import { ApiKeyModal } from './components/layout/ApiKeyModal';
 import { ExportModal } from './components/layout/ExportModal';
@@ -50,8 +52,22 @@ export default function App() {
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
 
+  // Global Accessibility (a11y) Hook for WCAG AAA compliance and hotkeys
+  const accessibility = useAccessibilityState({
+    onSelectTab: (tab) => setActiveTab(tab as TabId),
+    onToggleCopilot: () => setIsAssistantOpen((prev) => !prev),
+    onCloseModals: () => {
+      setIsApiKeyModalOpen(false);
+      setIsExportModalOpen(false);
+      setIsAssistantOpen(false);
+    },
+  });
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
+      {/* WCAG 2.1 AA / AAA Accessibility Controls Toolbar */}
+      <AccessibilityBar accessibility={accessibility} />
+
       {/* Skip to Main Content Link for Screen Readers & Keyboard Navigation */}
       <a
         href="#main-content"

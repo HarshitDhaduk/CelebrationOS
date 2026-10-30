@@ -49,3 +49,67 @@
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   Accessibility (a11y) & WCAG 2.1 AA / AAA Display Enhancements
+   ========================================================================== */
+
+/* WCAG AAA High-Contrast Theme */
+html.high-contrast {
+  filter: contrast(1.25);
+}
+
+html.high-contrast body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+html.high-contrast .bg-white,
+html.high-contrast .bg-slate-50,
+html.high-contrast .bg-slate-100,
+html.high-contrast .bg-slate-800,
+html.high-contrast .bg-slate-900 {
+  background-color: #050505 !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+html.high-contrast button,
+html.high-contrast input,
+html.high-contrast select,
+html.high-contrast textarea {
+  border-width: 2px !important;
+  border-color: #ffff00 !important;
+  color: #ffffff !important;
+}
+
+html.high-contrast a,
+html.high-contrast .text-rose-500,
+html.high-contrast .text-rose-600 {
+  color: #00ffff !important;
+  text-decoration: underline !important;
+}
+
+/* Font Scaling Classes */
+html.font-scale-normal {
+  font-size: 16px;
+}
+
+html.font-scale-large {
+  font-size: 18px;
+}
+
+html.font-scale-xl {
+  font-size: 20px;
+}
+
+/* Reduced Motion Override */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+

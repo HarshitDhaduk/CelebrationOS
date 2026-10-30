@@ -84,6 +84,7 @@ export const AssistantDrawer: React.FC<AssistantDrawerProps> = ({
         content: result.text,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         suggestedActions: result.suggestedActions,
+        engineBadge: result.engineBadge,
       };
 
       onUpdateChatHistory([...newHistory, botMessage]);
@@ -207,6 +208,14 @@ export const AssistantDrawer: React.FC<AssistantDrawerProps> = ({
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none border border-slate-200 dark:border-slate-700/60'
                   }`}
                 >
+                  {/* Transparent Engine Badge */}
+                  {msg.engineBadge && (
+                    <div className="flex items-center gap-1.5 text-[10px] text-slate-500 dark:text-slate-400 font-medium pb-1.5 border-b border-slate-200/50 dark:border-slate-700/50">
+                      <Sparkles className="w-2.5 h-2.5 text-amber-500" />
+                      <span>{msg.engineBadge}</span>
+                    </div>
+                  )}
+
                   <div className="whitespace-pre-wrap leading-relaxed prose prose-xs dark:prose-invert">
                     {msg.content}
                   </div>

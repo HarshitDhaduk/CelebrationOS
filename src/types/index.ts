@@ -157,6 +157,7 @@ export interface AssistantMessage {
   content: string;
   timestamp: string;
   suggestedActions?: SuggestedAction[];
+  engineBadge?: string;
 }
 
 export interface EventProject {
