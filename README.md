@@ -4,7 +4,7 @@
 
 [![CI/CD - Build, Test & Deploy](https://github.com/HarshitDhaduk/CelebrationOS/actions/workflows/deploy.yml/badge.svg)](https://github.com/HarshitDhaduk/CelebrationOS/actions/workflows/deploy.yml)
 [![CI Pipeline](https://github.com/HarshitDhaduk/CelebrationOS/actions/workflows/ci.yml/badge.svg)](https://github.com/HarshitDhaduk/CelebrationOS/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-83%2F83%20passed%20(12%20suites)-emerald)](https://github.com/HarshitDhaduk/CelebrationOS)
+[![Tests](https://img.shields.io/badge/tests-105%2F105%20passed%20(18%20suites)-emerald)](https://github.com/HarshitDhaduk/CelebrationOS)
 [![Accessibility: WCAG 2.1 AA / AAA](https://img.shields.io/badge/accessibility-WCAG%202.1%20AA%20%2F%20AAA-success)](https://github.com/HarshitDhaduk/CelebrationOS)
 [![Security: Enterprise Sanitization](https://img.shields.io/badge/security-PII%20Vault%20%26%20Injection%20Defended-blue)](https://github.com/HarshitDhaduk/CelebrationOS)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -99,34 +99,21 @@ CelebrationOS follows modern React 19 architecture patterns emphasizing high coh
 ---
 
 ## 🧪 Testing & Continuous Integration (CI)
-CelebrationOS features a **100% passing automated test suite** across **83 unit tests** in **12 test modules** powered by **Vitest**:
+CelebrationOS features a **100% passing automated test suite** across **105 unit tests** in **18 test modules** powered by **Vitest**:
 
 ```bash
 # Run automated unit test suite
 npm test
 ```
 
-### Comprehensive Test Coverage (83/83 Passing Tests):
-- ✅ **Client-Side PII Vault Suite (`src/tests/pii.test.ts` - 6 tests)**: Luhn algorithm card validation, phone/email masking, physical address redaction, and token rehydration.
-- ✅ **Dual-Tier Cache Suite (`src/tests/cache.test.ts` - 6 tests)**: In-memory LRU capacity eviction, TTL expiration, sessionStorage serialization, and cache-miss fetcher orchestration.
-- ✅ **Rate Limiter Suite (`src/tests/rateLimiter.test.ts` - 4 tests)**: Sliding-window quota enforcement, burst threshold throttling, and time replenishment.
+### Comprehensive Test Coverage (105/105 Passing Tests across 18 Suites):
+- ✅ **Client-Side PII Vault Suite (`src/tests/pii.test.ts` & `tests/pii.test.ts` - 10 tests)**: Luhn algorithm card validation, phone/email masking, physical address redaction, and token rehydration.
+- ✅ **Dual-Tier Cache Suite (`src/tests/cache.test.ts` & `tests/cache.test.ts` - 10 tests)**: In-memory LRU capacity eviction, TTL expiration, sessionStorage serialization, and cache-miss fetcher orchestration.
+- ✅ **Rate Limiter Suite (`src/tests/rateLimiter.test.ts` & `tests/rateLimiter.test.ts` - 6 tests)**: Sliding-window quota enforcement, burst threshold throttling, and time replenishment.
 - ✅ **Zod Runtime Schemas Suite (`src/tests/schemas.test.ts` - 6 tests)**: Domain model boundaries, BudgetItem validation, Vendor status enums, and Gemini action schemas.
-- ✅ **Accessibility & WCAG Suite (`src/tests/accessibility.test.ts` - 3 tests)**: Global keyboard access keys, font scale factors, and WCAG AAA contrast ratio verifications.
-- ✅ **Security & Sanitization Suite (`src/tests/security.test.ts` - 11 tests)**: XSS tag stripping, numeric bounds validation, API key pattern checks, prompt injection detection, and prototype pollution defenses.
-- ✅ **Run-of-Show & Timeline Engine (`src/tests/timelineEngine.test.ts` - 8 tests)**: 12h/24h time parser, milestone phase grouping, schedule sorting, double-booking detection, and consecutive order validation.
-- ✅ **Dynamic Budget Engine (`src/tests/budgetEngine.test.ts` - 6 tests)**: Auto-allocation against vertical benchmarks, contingency buffer calculation, cost-per-guest analysis, and multi-currency formatting (`USD`, `INR`, `EUR`, `GBP`, `CAD`, `AUD`).
-- ✅ **Gemini AI & Simulation Suite (`src/tests/geminiService.test.ts` - 6 tests)**: Prompt engineering assembly, live API dispatch, system prompt adherence, graceful offline simulation fallback, and 1-click action recommendation formatting.
-- ✅ **Storage & Project State Suite (`src/tests/storage.test.ts` - 5 tests)**: Project schema persistence, vertical preset switching, export/import verification, and currency synchronization.
-- ✅ **Calendar Export Engine (`src/tests/calendarExport.test.ts` - 4 tests)**: RFC 5545 iCalendar (`.ICS`) formatting, ISO date-time generation, summary/description escaping, and multi-event output.
-- ✅ **Vertical Presets Suite (`src/tests/presets.test.ts` - 18 tests)**: Complete data integrity, non-zero budgets, valid timeline milestones, verified vendor checklists, and creative palettes for Weddings, Birthdays, and Community events.
-
-```bash
-# Run automated unit test suite
-npm test
-```
-
-### Comprehensive Test Coverage (56/56 Passing Tests):
-- ✅ **Security & Sanitization Suite (`src/tests/security.test.ts` - 9 tests)**: XSS tag stripping, numeric bounds validation, API key pattern checks, JSON schema validation, and prototype pollution defenses.
+- ✅ **Readability & Speech Cadence Suite (`tests/readability.test.ts` - 4 tests)**: Syllable counting, Flesch Reading Ease, Flesch-Kincaid Grade Level, and WPM delivery timing.
+- ✅ **Accessibility & WCAG Suite (`src/tests/accessibility.test.ts` & `tests/accessibility.test.ts` - 5 tests)**: Global keyboard access keys, font scale factors, and WCAG AAA contrast ratio verifications.
+- ✅ **Security & Sanitization Suite (`src/tests/security.test.ts` & `tests/security.test.ts` - 17 tests)**: XSS tag stripping, numeric bounds validation, API key pattern checks, prompt injection detection, and prototype pollution defenses.
 - ✅ **Run-of-Show & Timeline Engine (`src/tests/timelineEngine.test.ts` - 8 tests)**: 12h/24h time parser, milestone phase grouping, schedule sorting, double-booking detection, and consecutive order validation.
 - ✅ **Dynamic Budget Engine (`src/tests/budgetEngine.test.ts` - 6 tests)**: Auto-allocation against vertical benchmarks, contingency buffer calculation, cost-per-guest analysis, and multi-currency formatting (`USD`, `INR`, `EUR`, `GBP`, `CAD`, `AUD`).
 - ✅ **Gemini AI & Simulation Suite (`src/tests/geminiService.test.ts` - 6 tests)**: Prompt engineering assembly, live API dispatch, system prompt adherence, graceful offline simulation fallback, and 1-click action recommendation formatting.
