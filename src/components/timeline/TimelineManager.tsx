@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { RunOfShowItem, MilestoneTask, EventProject } from '../../types';
 import { Card } from '../common/Card';
 import { Button } from '../common/Button';
-import { Badge } from '../common/Badge';
 import { Modal } from '../common/Modal';
 import {
   detectTimelineConflicts,
@@ -236,7 +235,7 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
       {/* TAB 1: Day-of Run-of-Show */}
       {activeTab === 'runOfShow' && (
         <div className="space-y-3">
-          {sortedRunOfShow.map((item, index) => (
+          {sortedRunOfShow.map((item) => (
             <Card
               key={item.id}
               className={`p-4 sm:p-5 transition-all ${
@@ -401,10 +400,11 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
       >
         <form onSubmit={handleAddScheduleItem} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="timeline-schedule-title" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Event Title *
             </label>
             <input
+              id="timeline-schedule-title"
               type="text"
               required
               placeholder="e.g. First Dance & Welcome Toast, Cake Cutting"
@@ -416,10 +416,11 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="timeline-schedule-start" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Start Time *
               </label>
               <input
+                id="timeline-schedule-start"
                 type="time"
                 required
                 value={newScheduleItem.startTime}
@@ -429,10 +430,11 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="timeline-schedule-end" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 End Time
               </label>
               <input
+                id="timeline-schedule-end"
                 type="time"
                 value={newScheduleItem.endTime}
                 onChange={(e) => setNewScheduleItem({ ...newScheduleItem, endTime: e.target.value })}
@@ -443,10 +445,11 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="timeline-schedule-responsible" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Responsible Party
               </label>
               <input
+                id="timeline-schedule-responsible"
                 type="text"
                 placeholder="e.g. Lead DJ, Maid of Honor, Caterer"
                 value={newScheduleItem.responsibleParty}
@@ -456,10 +459,11 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="timeline-schedule-location" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Location
               </label>
               <input
+                id="timeline-schedule-location"
                 type="text"
                 placeholder="e.g. Lawn Altar, Dining Pavilion, Rooftop"
                 value={newScheduleItem.location}
@@ -470,10 +474,11 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="timeline-schedule-notes" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Description & Logistics Notes
             </label>
             <textarea
+              id="timeline-schedule-notes"
               rows={2}
               placeholder="e.g. Cue acoustic track #4 as doors open; ensure wireless mic is ready."
               value={newScheduleItem.description}
@@ -503,10 +508,11 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
       >
         <form onSubmit={handleAddMilestone} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="timeline-milestone-title" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Milestone Title *
             </label>
             <input
+              id="timeline-milestone-title"
               type="text"
               required
               placeholder="e.g. Mail formal invitations, Finalize floral contract"
@@ -518,12 +524,13 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="timeline-milestone-phase" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Countdown Phase
               </label>
               <select
+                id="timeline-milestone-phase"
                 value={newMilestone.phase}
-                onChange={(e) => setNewMilestone({ ...newMilestone, phase: e.target.value as any })}
+                onChange={(e) => setNewMilestone({ ...newMilestone, phase: e.target.value as MilestoneTask['phase'] })}
                 className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               >
                 {PHASE_ORDER.map((pk) => (
@@ -535,10 +542,11 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="timeline-milestone-due" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Target Due Date
               </label>
               <input
+                id="timeline-milestone-due"
                 type="date"
                 value={newMilestone.dueDate}
                 onChange={(e) => setNewMilestone({ ...newMilestone, dueDate: e.target.value })}
@@ -549,12 +557,13 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="timeline-milestone-priority" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Priority
               </label>
               <select
+                id="timeline-milestone-priority"
                 value={newMilestone.priority}
-                onChange={(e) => setNewMilestone({ ...newMilestone, priority: e.target.value as any })}
+                onChange={(e) => setNewMilestone({ ...newMilestone, priority: e.target.value as 'high' | 'medium' | 'low' })}
                 className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               >
                 <option value="high">High Priority</option>
@@ -564,10 +573,11 @@ export const TimelineManager: React.FC<TimelineManagerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="timeline-milestone-assignee" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Assignee
               </label>
               <input
+                id="timeline-milestone-assignee"
                 type="text"
                 placeholder="e.g. Elena, Alex, Committee"
                 value={newMilestone.assignedTo}

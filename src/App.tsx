@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { EventProject, EventType, Currency, BudgetItem, RunOfShowItem, MilestoneTask, Vendor, VendorChecklist } from './types';
-import { loadProjectFromStorage, saveProjectToStorage, getPresetByEventType, getGeminiApiKey } from './services/storage';
+import { useState } from 'react';
+import { useEventProject } from './hooks/useEventProject';
+import { useDarkMode } from './hooks/useDarkMode';
+import { useGeminiApiKey } from './hooks/useGeminiApiKey';
 import { Navbar } from './components/layout/Navbar';
 import { ApiKeyModal } from './components/layout/ApiKeyModal';
 import { ExportModal } from './components/layout/ExportModal';
@@ -20,111 +21,65 @@ import {
   Heart,
 } from 'lucide-react';
 
+type TabId = 'overview' | 'budget' | 'timeline' | 'vendors' | 'ideas';
+
 export default function App() {
-  const [project, setProject] = useState<EventProject>(() => loadProjectFromStorage());
-  const [activeTab, setActiveTab] = useState<'overview' | 'budget' | 'timeline' | 'vendors' | 'ideas'>('overview');
-  const [apiKey, setApiKey] = useState<string>(() => getGeminiApiKey());
+  const {
+    project,
+    selectEventType,
+    changeCurrency,
+    updateEventDetails,
+    updateBudgetItems,
+    updateRunOfShow,
+    updateMilestones,
+    updateVendors,
+    updateChecklist,
+    updateThemes,
+    updateInvites,
+    updateDrinks,
+    updateSpeeches,
+    updateChatHistory,
+    importProject,
+  } = useEventProject();
+
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { apiKey, updateApiKey } = useGeminiApiKey();
+
+  const [activeTab, setActiveTab] = useState<TabId>('overview');
   const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [isAssistantOpen, setIsAssistantOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-    return false;
-  });
-
-  // Dark mode effect
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDarkMode]);
-
-  // Persist project on change
-  useEffect(() => {
-    saveProjectToStorage(project);
-  }, [project]);
-
-  const handleSelectEventType = (type: EventType) => {
-    const preset = getPresetByEventType(type);
-    setProject(preset);
-  };
-
-  const handleChangeCurrency = (curr: Currency) => {
-    setProject({
-      ...project,
-      event: {
-        ...project.event,
-        currency: curr,
-      },
-    });
-  };
-
-  const handleUpdateEvent = (updatedDetails: any) => {
-    setProject({
-      ...project,
-      event: updatedDetails,
-    });
-  };
-
-  const handleUpdateBudgetItems = (items: BudgetItem[]) => {
-    setProject({
-      ...project,
-      budgetItems: items,
-    });
-  };
-
-  const handleUpdateRunOfShow = (items: RunOfShowItem[]) => {
-    setProject({
-      ...project,
-      runOfShow: items,
-    });
-  };
-
-  const handleUpdateMilestones = (milestones: MilestoneTask[]) => {
-    setProject({
-      ...project,
-      milestones,
-    });
-  };
-
-  const handleUpdateVendors = (vendors: Vendor[]) => {
-    setProject({
-      ...project,
-      vendors,
-    });
-  };
-
-  const handleUpdateChecklist = (checklist: VendorChecklist[]) => {
-    setProject({
-      ...project,
-      vendorChecklist: checklist,
-    });
-  };
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
-      
-      {/* Top Navbar */}
+      {/* Skip to Main Content Link for Screen Readers & Keyboard Navigation */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-rose-600 focus:text-white focus:rounded-xl focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 font-semibold text-xs"
+      >
+        Skip to main content
+      </a>
+
+      {/* Top Sticky Navbar */}
       <Navbar
         currentEventType={project.event.eventType}
-        onSelectEventType={handleSelectEventType}
+        onSelectEventType={selectEventType}
         currency={project.event.currency}
-        onChangeCurrency={handleChangeCurrency}
+        onChangeCurrency={changeCurrency}
         apiKey={apiKey}
         onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
         onOpenExportModal={() => setIsExportModalOpen(true)}
         isDarkMode={isDarkMode}
-        onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+        onToggleDarkMode={toggleDarkMode}
         onOpenAssistant={() => setIsAssistantOpen(true)}
       />
 
-      {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
-        
+      {/* Main Planning Container */}
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 focus:outline-none"
+      >
         {/* Event Hero Overview Header */}
         <EventHero
           event={project.event}
@@ -132,12 +87,21 @@ export default function App() {
           milestones={project.milestones}
           vendors={project.vendors}
           currency={project.event.currency}
-          onUpdateEvent={handleUpdateEvent}
+          onUpdateEvent={updateEventDetails}
         />
 
-        {/* Primary Tabs Navigation Bar */}
-        <div className="flex border-b border-slate-200 dark:border-slate-800 gap-1 overflow-x-auto pb-1 text-sm font-semibold">
+        {/* Primary Tabs Navigation Bar with WAI-ARIA tablist semantics */}
+        <div
+          role="tablist"
+          aria-label="Planning workspace modules"
+          className="flex border-b border-slate-200 dark:border-slate-800 gap-1 overflow-x-auto pb-1 text-sm font-semibold"
+        >
           <button
+            type="button"
+            role="tab"
+            id="tab-overview"
+            aria-selected={activeTab === 'overview'}
+            aria-controls="panel-overview"
             onClick={() => setActiveTab('overview')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-t-xl transition-all border-b-2 ${
               activeTab === 'overview'
@@ -150,6 +114,11 @@ export default function App() {
           </button>
 
           <button
+            type="button"
+            role="tab"
+            id="tab-budget"
+            aria-selected={activeTab === 'budget'}
+            aria-controls="panel-budget"
             onClick={() => setActiveTab('budget')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-t-xl transition-all border-b-2 ${
               activeTab === 'budget'
@@ -165,6 +134,11 @@ export default function App() {
           </button>
 
           <button
+            type="button"
+            role="tab"
+            id="tab-timeline"
+            aria-selected={activeTab === 'timeline'}
+            aria-controls="panel-timeline"
             onClick={() => setActiveTab('timeline')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-t-xl transition-all border-b-2 ${
               activeTab === 'timeline'
@@ -180,6 +154,11 @@ export default function App() {
           </button>
 
           <button
+            type="button"
+            role="tab"
+            id="tab-vendors"
+            aria-selected={activeTab === 'vendors'}
+            aria-controls="panel-vendors"
             onClick={() => setActiveTab('vendors')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-t-xl transition-all border-b-2 ${
               activeTab === 'vendors'
@@ -195,6 +174,11 @@ export default function App() {
           </button>
 
           <button
+            type="button"
+            role="tab"
+            id="tab-ideas"
+            aria-selected={activeTab === 'ideas'}
+            aria-controls="panel-ideas"
             onClick={() => setActiveTab('ideas')}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-t-xl transition-all border-b-2 ${
               activeTab === 'ideas'
@@ -208,7 +192,12 @@ export default function App() {
         </div>
 
         {/* Tab Content Display */}
-        <div className="pt-2">
+        <div
+          role="tabpanel"
+          id={`panel-${activeTab}`}
+          aria-labelledby={`tab-${activeTab}`}
+          className="pt-2 focus:outline-none"
+        >
           {activeTab === 'overview' && (
             <div className="space-y-6">
               {/* Dual quick overview of budget and timeline */}
@@ -220,6 +209,7 @@ export default function App() {
                       Budget Summary Snapshot
                     </h3>
                     <button
+                      type="button"
                       onClick={() => setActiveTab('budget')}
                       className="text-xs text-rose-600 dark:text-rose-400 font-semibold hover:underline"
                     >
@@ -232,7 +222,7 @@ export default function App() {
                     guestCount={project.event.guestCount}
                     currency={project.event.currency}
                     eventType={project.event.eventType}
-                    onUpdateItems={handleUpdateBudgetItems}
+                    onUpdateItems={updateBudgetItems}
                   />
                 </div>
 
@@ -243,6 +233,7 @@ export default function App() {
                       Day-of Run of Show Pacing
                     </h3>
                     <button
+                      type="button"
                       onClick={() => setActiveTab('timeline')}
                       className="text-xs text-amber-600 dark:text-amber-400 font-semibold hover:underline"
                     >
@@ -251,8 +242,8 @@ export default function App() {
                   </div>
                   <TimelineManager
                     project={project}
-                    onUpdateRunOfShow={handleUpdateRunOfShow}
-                    onUpdateMilestones={handleUpdateMilestones}
+                    onUpdateRunOfShow={updateRunOfShow}
+                    onUpdateMilestones={updateMilestones}
                   />
                 </div>
               </div>
@@ -266,15 +257,15 @@ export default function App() {
               guestCount={project.event.guestCount}
               currency={project.event.currency}
               eventType={project.event.eventType}
-              onUpdateItems={handleUpdateBudgetItems}
+              onUpdateItems={updateBudgetItems}
             />
           )}
 
           {activeTab === 'timeline' && (
             <TimelineManager
               project={project}
-              onUpdateRunOfShow={handleUpdateRunOfShow}
-              onUpdateMilestones={handleUpdateMilestones}
+              onUpdateRunOfShow={updateRunOfShow}
+              onUpdateMilestones={updateMilestones}
             />
           )}
 
@@ -282,26 +273,26 @@ export default function App() {
             <VendorManager
               project={project}
               currency={project.event.currency}
-              onUpdateVendors={handleUpdateVendors}
-              onUpdateChecklist={handleUpdateChecklist}
+              onUpdateVendors={updateVendors}
+              onUpdateChecklist={updateChecklist}
             />
           )}
 
           {activeTab === 'ideas' && (
             <CreativeStudio
               project={project}
-              onUpdateThemes={(themes) => setProject({ ...project, creativeThemes: themes })}
-              onUpdateInvites={(invites) => setProject({ ...project, invitations: invites })}
-              onUpdateDrinks={(drinks) => setProject({ ...project, drinks })}
-              onUpdateSpeeches={(speeches) => setProject({ ...project, speeches })}
+              onUpdateThemes={updateThemes}
+              onUpdateInvites={updateInvites}
+              onUpdateDrinks={updateDrinks}
+              onUpdateSpeeches={updateSpeeches}
             />
           )}
         </div>
-
       </main>
 
       {/* Floating Copilot Button */}
       <button
+        type="button"
         onClick={() => setIsAssistantOpen(true)}
         className="fixed bottom-6 right-6 z-40 bg-gradient-to-tr from-rose-600 via-pink-600 to-amber-500 text-white p-4 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all flex items-center gap-2.5 font-bold text-sm group"
         aria-label="Open CelebrationOS AI Copilot"
@@ -334,7 +325,7 @@ export default function App() {
               rel="noopener noreferrer"
               className="flex items-center gap-1 hover:text-slate-800 dark:hover:text-white"
             >
-              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
               </svg>
               <span>GitHub</span>
@@ -350,10 +341,10 @@ export default function App() {
         project={project}
         apiKey={apiKey}
         onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
-        onSwitchTab={(tabId) => setActiveTab(tabId as any)}
-        onAddBudgetItem={(item) => handleUpdateBudgetItems([...project.budgetItems, item])}
-        onAddScheduleItem={(item) => handleUpdateRunOfShow([...project.runOfShow, item])}
-        onUpdateChatHistory={(history) => setProject({ ...project, chatHistory: history })}
+        onSwitchTab={(tabId) => setActiveTab(tabId as TabId)}
+        onAddBudgetItem={(item) => updateBudgetItems([...project.budgetItems, item])}
+        onAddScheduleItem={(item) => updateRunOfShow([...project.runOfShow, item])}
+        onUpdateChatHistory={updateChatHistory}
       />
 
       {/* API Key Modal */}
@@ -361,7 +352,7 @@ export default function App() {
         isOpen={isApiKeyModalOpen}
         onClose={() => setIsApiKeyModalOpen(false)}
         currentKey={apiKey}
-        onSaveKey={(k) => setApiKey(k)}
+        onSaveKey={updateApiKey}
       />
 
       {/* Export / Sync Hub Modal */}
@@ -369,9 +360,8 @@ export default function App() {
         isOpen={isExportModalOpen}
         onClose={() => setIsExportModalOpen(false)}
         project={project}
-        onImportProject={(imported) => setProject(imported)}
+        onImportProject={importProject}
       />
-
     </div>
   );
 }

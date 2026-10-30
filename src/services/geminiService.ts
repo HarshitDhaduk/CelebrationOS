@@ -1,13 +1,10 @@
-import { EventProject, AssistantMessage, BudgetCategory } from '../types';
+import { EventProject, SuggestedAction } from '../types';
 import { calculateBudgetMetrics, formatCurrency } from '../utils/budgetEngine';
+import { sanitizeText } from '../utils/security';
 
 export interface CopilotGenerationResult {
   text: string;
-  suggestedActions?: {
-    label: string;
-    actionType: 'add_budget' | 'add_timeline' | 'add_vendor' | 'switch_tab' | 'apply_theme';
-    payload?: any;
-  }[];
+  suggestedActions?: SuggestedAction[];
   isLiveApi: boolean;
 }
 
@@ -16,21 +13,23 @@ export async function askEventCopilot(
   project: EventProject,
   apiKey?: string
 ): Promise<CopilotGenerationResult> {
+  const sanitizedPrompt = sanitizeText(userPrompt, 1500);
   const cleanKey = apiKey?.trim();
 
   if (cleanKey) {
     try {
-      const response = await callGeminiLive(userPrompt, project, cleanKey);
+      const response = await callGeminiLive(sanitizedPrompt, project, cleanKey);
       return {
         ...response,
         isLiveApi: true,
       };
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const errMessage = err instanceof Error ? err.message : 'Network limitation';
       console.warn('Gemini API call encountered an issue, falling back to intelligent offline assistant engine:', err);
       // Fallback gracefully so user experience is not disrupted
-      const simulated = generateContextualSimulation(userPrompt, project);
+      const simulated = generateContextualSimulation(sanitizedPrompt, project);
       return {
-        text: `*[Live Gemini Note: Switched to Intelligent Local Engine due to API response: ${err.message || 'Network limitation'}]*\n\n${simulated.text}`,
+        text: `*[Live Gemini Note: Switched to Intelligent Local Engine due to API response: ${errMessage}]*\n\n${simulated.text}`,
         suggestedActions: simulated.suggestedActions,
         isLiveApi: false,
       };
@@ -38,7 +37,7 @@ export async function askEventCopilot(
   }
 
   // Offline intelligent simulation engine
-  const simulated = generateContextualSimulation(userPrompt, project);
+  const simulated = generateContextualSimulation(sanitizedPrompt, project);
   return {
     ...simulated,
     isLiveApi: false,
@@ -49,7 +48,7 @@ async function callGeminiLive(
   prompt: string,
   project: EventProject,
   apiKey: string
-): Promise<{ text: string; suggestedActions?: any[] }> {
+): Promise<{ text: string; suggestedActions?: SuggestedAction[] }> {
   const metrics = calculateBudgetMetrics(project.budgetItems, project.event.totalBudget, project.event.guestCount);
   
   const systemInstruction = `You are "CelebrationOS Copilot", an elite, creative, and detail-oriented event planner AI specializing in Weddings, Milestone Birthdays, and Community Civic Events.
@@ -117,10 +116,10 @@ GUIDELINES:
   return { text, suggestedActions };
 }
 
-function generateContextualSimulation(
+export function generateContextualSimulation(
   prompt: string,
   project: EventProject
-): { text: string; suggestedActions?: any[] } {
+): { text: string; suggestedActions?: SuggestedAction[] } {
   const p = prompt.toLowerCase();
   const { event, budgetItems } = project;
   const metrics = calculateBudgetMetrics(budgetItems, event.totalBudget, event.guestCount);
@@ -257,9 +256,8 @@ function generateContextualSimulation(
   };
 }
 
-function detectSuggestedActions(prompt: string, project: EventProject): any[] {
+function detectSuggestedActions(prompt: string, _project: EventProject): SuggestedAction[] {
   const p = prompt.toLowerCase();
-  const cur = project.event.currency;
 
   if (p.includes('budget') || p.includes('cost')) {
     return [

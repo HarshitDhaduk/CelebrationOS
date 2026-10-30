@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Vendor, VendorChecklist, BudgetCategory, Currency, EventProject, VendorStatus } from '../../types';
 import { Card } from '../common/Card';
 import { Button } from '../common/Button';
-import { Badge } from '../common/Badge';
 import { Modal } from '../common/Modal';
 import { formatCurrency } from '../../utils/budgetEngine';
 import { CATEGORY_LABELS, CATEGORY_COLORS } from '../../data/industryBenchmarks';
@@ -17,9 +16,7 @@ import {
   Copy,
   Check,
   Trash2,
-  ExternalLink,
   ShieldCheck,
-  Star,
 } from 'lucide-react';
 
 interface VendorManagerProps {
@@ -222,7 +219,6 @@ ${event.title}`;
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {vendors.map((vendor) => {
           const catColor = CATEGORY_COLORS[vendor.category];
-          const isBooked = vendor.status === 'booked' || vendor.status === 'completed';
 
           return (
             <Card key={vendor.id} className="p-5 flex flex-col justify-between space-y-4">
@@ -409,10 +405,11 @@ ${event.title}`;
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="rfp-vendor-category" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Vendor Category
               </label>
               <select
+                id="rfp-vendor-category"
                 value={rfpCategory}
                 onChange={(e) => setRfpCategory(e.target.value as BudgetCategory)}
                 className="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
@@ -426,10 +423,11 @@ ${event.title}`;
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="rfp-vendor-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Vendor Name
               </label>
               <input
+                id="rfp-vendor-name"
                 type="text"
                 value={rfpVendorName}
                 onChange={(e) => setRfpVendorName(e.target.value)}
@@ -439,10 +437,11 @@ ${event.title}`;
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="rfp-vendor-budget" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Target Budget ({currency})
               </label>
               <input
+                id="rfp-vendor-budget"
                 type="number"
                 value={rfpTargetBudget}
                 onChange={(e) => setRfpTargetBudget(parseFloat(e.target.value) || 0)}
@@ -509,10 +508,11 @@ ${event.title}`;
       >
         <form onSubmit={handleAddVendor} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="vendor-business-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Vendor / Business Name *
             </label>
             <input
+              id="vendor-business-name"
               type="text"
               required
               placeholder="e.g. Pacific Coast Florals, DJ Nexus"
@@ -524,10 +524,11 @@ ${event.title}`;
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="vendor-category-select" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Category
               </label>
               <select
+                id="vendor-category-select"
                 value={newVendor.category}
                 onChange={(e) => setNewVendor({ ...newVendor, category: e.target.value as BudgetCategory })}
                 className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
@@ -541,10 +542,11 @@ ${event.title}`;
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="vendor-status-select" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Status
               </label>
               <select
+                id="vendor-status-select"
                 value={newVendor.status}
                 onChange={(e) => setNewVendor({ ...newVendor, status: e.target.value as VendorStatus })}
                 className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
@@ -560,10 +562,11 @@ ${event.title}`;
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="vendor-contact-person" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Contact Person
               </label>
               <input
+                id="vendor-contact-person"
                 type="text"
                 placeholder="e.g. Maria Chen"
                 value={newVendor.contactPerson}
@@ -573,10 +576,11 @@ ${event.title}`;
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="vendor-phone-number" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Phone Number
               </label>
               <input
+                id="vendor-phone-number"
                 type="text"
                 placeholder="e.g. (555) 234-5678"
                 value={newVendor.phone}
@@ -587,10 +591,11 @@ ${event.title}`;
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="vendor-email-address" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Email Address
             </label>
             <input
+              id="vendor-email-address"
               type="email"
               placeholder="e.g. booking@pacificflorals.com"
               value={newVendor.email}
@@ -601,10 +606,11 @@ ${event.title}`;
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="vendor-quoted-price" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Quoted Price ({currency})
               </label>
               <input
+                id="vendor-quoted-price"
                 type="number"
                 min="0"
                 value={newVendor.quotedPrice || ''}
@@ -614,10 +620,11 @@ ${event.title}`;
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="vendor-deposit-paid" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Deposit Paid ({currency})
               </label>
               <input
+                id="vendor-deposit-paid"
                 type="number"
                 min="0"
                 value={newVendor.depositPaid || ''}

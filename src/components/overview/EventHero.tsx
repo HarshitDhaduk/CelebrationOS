@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { EventDetails, Currency, MilestoneTask, Vendor, BudgetItem } from '../../types';
-import { Card } from '../common/Card';
 import { Badge } from '../common/Badge';
 import { Button } from '../common/Button';
 import { Modal } from '../common/Modal';
@@ -15,8 +14,6 @@ import {
   Sparkles,
   Edit3,
   Clock,
-  CheckCircle,
-  Briefcase
 } from 'lucide-react';
 
 interface EventHeroProps {
@@ -179,10 +176,11 @@ export const EventHero: React.FC<EventHeroProps> = ({
       >
         <form onSubmit={handleSaveEvent} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="hero-event-title" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Event Title
             </label>
             <input
+              id="hero-event-title"
               type="text"
               required
               value={formData.title}
@@ -193,10 +191,11 @@ export const EventHero: React.FC<EventHeroProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="hero-event-subtype" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Event Sub-type / Style
               </label>
               <input
+                id="hero-event-subtype"
                 type="text"
                 value={formData.subType || ''}
                 onChange={(e) => setFormData({ ...formData, subType: e.target.value })}
@@ -206,21 +205,25 @@ export const EventHero: React.FC<EventHeroProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="hero-event-date" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Date & Time
               </label>
               <div className="grid grid-cols-2 gap-2">
                 <input
+                  id="hero-event-date"
                   type="date"
                   required
                   value={formData.date}
                   onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                  aria-label="Event date"
                   className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
                 />
                 <input
+                  id="hero-event-time"
                   type="time"
                   value={formData.time || '16:00'}
                   onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                  aria-label="Event time"
                   className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
                 />
               </div>
@@ -229,10 +232,11 @@ export const EventHero: React.FC<EventHeroProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="hero-event-guest-count" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Guest Count
               </label>
               <input
+                id="hero-event-guest-count"
                 type="number"
                 min="1"
                 required
@@ -243,10 +247,11 @@ export const EventHero: React.FC<EventHeroProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="hero-event-total-budget" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Total Target Budget ({currency})
               </label>
               <input
+                id="hero-event-total-budget"
                 type="number"
                 min="0"
                 required
@@ -258,10 +263,11 @@ export const EventHero: React.FC<EventHeroProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="hero-event-location" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Venue / Location
             </label>
             <input
+              id="hero-event-location"
               type="text"
               required
               value={formData.location}
@@ -271,10 +277,11 @@ export const EventHero: React.FC<EventHeroProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="hero-event-vibe" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Vibe / Aesthetic Vision
             </label>
             <textarea
+              id="hero-event-vibe"
               rows={2}
               value={formData.vibe}
               onChange={(e) => setFormData({ ...formData, vibe: e.target.value })}

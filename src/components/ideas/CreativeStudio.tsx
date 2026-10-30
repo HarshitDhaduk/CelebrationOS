@@ -3,7 +3,6 @@ import { EventProject, CreativeTheme, DigitalInvite, SignatureDrink, SpeechDraft
 import { Card } from '../common/Card';
 import { Button } from '../common/Button';
 import { Badge } from '../common/Badge';
-import { Modal } from '../common/Modal';
 import {
   Palette,
   Mail,
@@ -12,26 +11,19 @@ import {
   Sparkles,
   Copy,
   Check,
-  Plus,
   Heart,
-  GlassWater,
-  PartyPopper,
 } from 'lucide-react';
 
 interface CreativeStudioProps {
   project: EventProject;
-  onUpdateThemes: (themes: CreativeTheme[]) => void;
-  onUpdateInvites: (invites: DigitalInvite[]) => void;
-  onUpdateDrinks: (drinks: SignatureDrink[]) => void;
-  onUpdateSpeeches: (speeches: SpeechDraft[]) => void;
+  onUpdateThemes?: (themes: CreativeTheme[]) => void;
+  onUpdateInvites?: (invites: DigitalInvite[]) => void;
+  onUpdateDrinks?: (drinks: SignatureDrink[]) => void;
+  onUpdateSpeeches?: (speeches: SpeechDraft[]) => void;
 }
 
 export const CreativeStudio: React.FC<CreativeStudioProps> = ({
   project,
-  onUpdateThemes,
-  onUpdateInvites,
-  onUpdateDrinks,
-  onUpdateSpeeches,
 }) => {
   const [activeSection, setActiveSection] = useState<'themes' | 'invites' | 'drinks' | 'speeches'>('themes');
   const [copiedItem, setCopiedItem] = useState<string | null>(null);

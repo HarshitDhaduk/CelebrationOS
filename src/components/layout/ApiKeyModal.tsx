@@ -53,16 +53,21 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+          <label
+            htmlFor="gemini-api-key-input"
+            className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5"
+          >
             Gemini API Key
           </label>
           <div className="relative">
             <Key className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
             <input
+              id="gemini-api-key-input"
               type="password"
               placeholder="AIzaSy..."
               value={keyInput}
               onChange={(e) => setKeyInput(e.target.value)}
+              autoComplete="off"
               className="w-full pl-9 pr-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
             />
           </div>

@@ -4,7 +4,8 @@ import { Button } from '../common/Button';
 import { EventProject } from '../../types';
 import { downloadIcsFile } from '../../services/calendarExport';
 import { exportProjectAsJson } from '../../services/storage';
-import { Calendar, Download, Printer, Upload, FileText, CheckCircle } from 'lucide-react';
+import { isValidProjectJson } from '../../utils/security';
+import { Calendar, Download, Printer, Upload, FileText } from 'lucide-react';
 
 interface ExportModalProps {
   isOpen: boolean;
@@ -33,14 +34,14 @@ export const ExportModal: React.FC<ExportModalProps> = ({
     reader.onload = (event) => {
       try {
         const parsed = JSON.parse(event.target?.result as string);
-        if (parsed.event && parsed.budgetItems) {
+        if (isValidProjectJson(parsed)) {
           onImportProject(parsed);
           onClose();
         } else {
-          alert('Invalid CelebrationOS project file.');
+          alert('Invalid CelebrationOS project file schema. Please upload a valid exported plan.');
         }
-      } catch (err) {
-        alert('Could not parse JSON file.');
+      } catch {
+        alert('Could not parse JSON file. Ensure the file contains valid JSON formatting.');
       }
     };
     reader.readAsText(file);

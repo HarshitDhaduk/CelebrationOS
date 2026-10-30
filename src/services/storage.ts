@@ -1,5 +1,6 @@
 import { EventProject, EventType } from '../types';
 import { weddingPreset, birthdayPreset, communityPreset } from '../data/defaultPresets';
+import { isValidProjectJson } from '../utils/security';
 
 const STORAGE_KEY = 'celebration_os_active_project';
 const API_KEY_STORAGE = 'celebration_os_gemini_key';
@@ -23,12 +24,16 @@ export function loadProjectFromStorage(): EventProject {
   try {
     const data = localStorage.getItem(STORAGE_KEY);
     if (data) {
-      return JSON.parse(data);
+      const parsed = JSON.parse(data);
+      if (isValidProjectJson(parsed)) {
+        return parsed;
+      }
+      console.warn('Stored project schema invalid, resetting to default wedding preset');
     }
   } catch (err) {
     console.warn('Error reading from localStorage, using default wedding preset', err);
   }
-  return weddingPreset;
+  return JSON.parse(JSON.stringify(weddingPreset));
 }
 
 export function getPresetByEventType(type: EventType): EventProject {

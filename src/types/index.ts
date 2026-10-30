@@ -138,16 +138,25 @@ export interface SpeechDraft {
   closingToast: string;
 }
 
+export type SuggestedActionPayload =
+  | string
+  | Partial<BudgetItem>
+  | Partial<RunOfShowItem>
+  | Partial<Vendor>
+  | Record<string, unknown>;
+
+export interface SuggestedAction {
+  label: string;
+  actionType: 'add_budget' | 'add_timeline' | 'add_vendor' | 'switch_tab' | 'apply_theme';
+  payload?: SuggestedActionPayload;
+}
+
 export interface AssistantMessage {
   id: string;
   sender: 'user' | 'assistant';
   content: string;
   timestamp: string;
-  suggestedActions?: {
-    label: string;
-    actionType: 'add_budget' | 'add_timeline' | 'add_vendor' | 'switch_tab' | 'apply_theme';
-    payload?: any;
-  }[];
+  suggestedActions?: SuggestedAction[];
 }
 
 export interface EventProject {

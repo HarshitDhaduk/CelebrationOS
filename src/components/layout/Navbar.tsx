@@ -54,9 +54,15 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Middle: Event Preset Switcher */}
-        <div className="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700/60 text-xs font-semibold">
+        <div
+          role="group"
+          aria-label="Event type preset switcher"
+          className="hidden md:flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700/60 text-xs font-semibold"
+        >
           <button
+            type="button"
             onClick={() => onSelectEventType('wedding')}
+            aria-pressed={currentEventType === 'wedding'}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${
               currentEventType === 'wedding'
                 ? 'bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400 shadow-sm'
@@ -68,7 +74,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
+            type="button"
             onClick={() => onSelectEventType('birthday')}
+            aria-pressed={currentEventType === 'birthday'}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${
               currentEventType === 'birthday'
                 ? 'bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400 shadow-sm'
@@ -80,7 +88,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
+            type="button"
             onClick={() => onSelectEventType('community')}
+            aria-pressed={currentEventType === 'community'}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${
               currentEventType === 'community'
                 ? 'bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 shadow-sm'
@@ -161,9 +171,15 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Mobile Preset Switcher Row */}
-      <div className="flex md:hidden px-4 py-2 border-t border-slate-100 dark:border-slate-800/80 bg-slate-50 dark:bg-slate-900/60 gap-1.5 overflow-x-auto text-xs">
+      <div
+        role="group"
+        aria-label="Mobile event type preset switcher"
+        className="flex md:hidden px-4 py-2 border-t border-slate-100 dark:border-slate-800/80 bg-slate-50 dark:bg-slate-900/60 gap-1.5 overflow-x-auto text-xs"
+      >
         <button
+          type="button"
           onClick={() => onSelectEventType('wedding')}
+          aria-pressed={currentEventType === 'wedding'}
           className={`flex-1 py-1 px-2 rounded-lg font-medium text-center ${
             currentEventType === 'wedding' ? 'bg-rose-600 text-white' : 'text-slate-600 dark:text-slate-400'
           }`}
@@ -171,7 +187,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           💒 Wedding
         </button>
         <button
+          type="button"
           onClick={() => onSelectEventType('birthday')}
+          aria-pressed={currentEventType === 'birthday'}
           className={`flex-1 py-1 px-2 rounded-lg font-medium text-center ${
             currentEventType === 'birthday' ? 'bg-amber-600 text-white' : 'text-slate-600 dark:text-slate-400'
           }`}
@@ -179,7 +197,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           🎂 Birthday
         </button>
         <button
+          type="button"
           onClick={() => onSelectEventType('community')}
+          aria-pressed={currentEventType === 'community'}
           className={`flex-1 py-1 px-2 rounded-lg font-medium text-center ${
             currentEventType === 'community' ? 'bg-emerald-600 text-white' : 'text-slate-600 dark:text-slate-400'
           }`}

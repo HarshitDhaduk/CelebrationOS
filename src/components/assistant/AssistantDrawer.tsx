@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { EventProject, AssistantMessage } from '../../types';
+import { EventProject, AssistantMessage, BudgetItem, RunOfShowItem, SuggestedAction, BudgetCategory } from '../../types';
 import { Button } from '../common/Button';
-import { Badge } from '../common/Badge';
 import { askEventCopilot } from '../../services/geminiService';
 import {
   Sparkles,
@@ -9,7 +8,6 @@ import {
   Send,
   Wand2,
   Key,
-  CheckCircle2,
   ArrowRight,
   Bot,
   User,
@@ -22,8 +20,8 @@ interface AssistantDrawerProps {
   apiKey: string;
   onOpenApiKeyModal: () => void;
   onSwitchTab: (tabId: string) => void;
-  onAddBudgetItem: (item: any) => void;
-  onAddScheduleItem: (item: any) => void;
+  onAddBudgetItem: (item: BudgetItem) => void;
+  onAddScheduleItem: (item: RunOfShowItem) => void;
   onUpdateChatHistory: (messages: AssistantMessage[]) => void;
 }
 
@@ -89,11 +87,12 @@ export const AssistantDrawer: React.FC<AssistantDrawerProps> = ({
       };
 
       onUpdateChatHistory([...newHistory, botMessage]);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const errMessage = err instanceof Error ? err.message : 'Please try again.';
       const errorMessage: AssistantMessage = {
         id: `err-${Date.now()}`,
         sender: 'assistant',
-        content: `Apologies, I encountered an issue processing that: ${err.message || 'Please try again.'}`,
+        content: `Apologies, I encountered an issue processing that: ${errMessage}`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       onUpdateChatHistory([...newHistory, errorMessage]);
@@ -102,40 +101,47 @@ export const AssistantDrawer: React.FC<AssistantDrawerProps> = ({
     }
   };
 
-  const handleActionClick = (action: { label: string; actionType: string; payload?: any }) => {
-    if (action.actionType === 'switch_tab' && action.payload) {
+  const handleActionClick = (action: SuggestedAction) => {
+    if (action.actionType === 'switch_tab' && typeof action.payload === 'string') {
       onSwitchTab(action.payload);
       onClose();
-    } else if (action.actionType === 'add_budget' && action.payload) {
+    } else if (action.actionType === 'add_budget' && action.payload && typeof action.payload === 'object') {
+      const payload = action.payload as Partial<BudgetItem>;
       onAddBudgetItem({
         id: `ai-b-${Date.now()}`,
-        name: action.payload.name || 'AI Added Item',
-        category: action.payload.category || 'contingency',
-        estimatedCost: action.payload.estimatedCost || 500,
+        name: payload.name || 'AI Added Item',
+        category: (payload.category as BudgetCategory) || 'contingency',
+        estimatedCost: payload.estimatedCost || 500,
         actualCost: 0,
         paidAmount: 0,
         isPaid: false,
-        priority: action.payload.priority || 'must-have',
+        priority: payload.priority || 'must-have',
         notes: 'Added via AI Copilot recommendation.',
       });
-      alert(`Added "${action.payload.name}" to your budget!`);
-    } else if (action.actionType === 'add_timeline' && action.payload) {
+      alert(`Added "${payload.name || 'Item'}" to your budget!`);
+    } else if (action.actionType === 'add_timeline' && action.payload && typeof action.payload === 'object') {
+      const payload = action.payload as Partial<RunOfShowItem>;
       onAddScheduleItem({
         id: `ai-t-${Date.now()}`,
-        startTime: action.payload.startTime || '16:00',
-        endTime: action.payload.endTime || '',
-        title: action.payload.title || 'AI Added Milestone',
-        description: action.payload.description || '',
-        responsibleParty: action.payload.responsibleParty || 'Coordinator',
-        location: action.payload.location || 'Main Venue',
+        startTime: payload.startTime || '16:00',
+        endTime: payload.endTime || '',
+        title: payload.title || 'AI Added Milestone',
+        description: payload.description || '',
+        responsibleParty: payload.responsibleParty || 'Coordinator',
+        location: payload.location || 'Main Venue',
         completed: false,
       });
-      alert(`Added "${action.payload.title}" to your run-of-show!`);
+      alert(`Added "${payload.title || 'Milestone'}" to your run-of-show!`);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
+    <div
+      className="fixed inset-0 z-50 overflow-hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-label="CelebrationOS Copilot"
+    >
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"
@@ -180,7 +186,7 @@ export const AssistantDrawer: React.FC<AssistantDrawerProps> = ({
           </div>
 
           {/* Chat Messages Body */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-4">
+          <div className="flex-1 p-4 overflow-y-auto space-y-4" aria-live="polite" aria-atomic="false">
             {project.chatHistory.map((msg) => (
               <div
                 key={msg.id}

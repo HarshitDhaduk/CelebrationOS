@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { BudgetItem, BudgetCategory, Currency, EventType } from '../../types';
 import { Card } from '../common/Card';
 import { Button } from '../common/Button';
-import { Badge } from '../common/Badge';
 import { Modal } from '../common/Modal';
 import {
   calculateBudgetMetrics,
@@ -456,10 +455,11 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
       >
         <form onSubmit={handleAddItem} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="budget-expense-name" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Expense Item Name *
             </label>
             <input
+              id="budget-expense-name"
               type="text"
               required
               placeholder="e.g. Cocktail Hour Canapes, Drone Videographer"
@@ -471,10 +471,11 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="budget-expense-category" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Category
               </label>
               <select
+                id="budget-expense-category"
                 value={newItem.category}
                 onChange={(e) => setNewItem({ ...newItem, category: e.target.value as BudgetCategory })}
                 className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
@@ -488,12 +489,13 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="budget-expense-priority" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Priority
               </label>
               <select
+                id="budget-expense-priority"
                 value={newItem.priority}
-                onChange={(e) => setNewItem({ ...newItem, priority: e.target.value as any })}
+                onChange={(e) => setNewItem({ ...newItem, priority: e.target.value as 'must-have' | 'nice-to-have' | 'optional' })}
                 className="w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-rose-500 focus:outline-none text-slate-900 dark:text-slate-100"
               >
                 <option value="must-have">Must-Have</option>
@@ -505,10 +507,11 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="budget-expense-estimated-cost" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Estimated Cost ({currency}) *
               </label>
               <input
+                id="budget-expense-estimated-cost"
                 type="number"
                 min="0"
                 required
@@ -519,10 +522,11 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <label htmlFor="budget-expense-actual-cost" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Actual Cost / Quoted ({currency})
               </label>
               <input
+                id="budget-expense-actual-cost"
                 type="number"
                 min="0"
                 value={newItem.actualCost || ''}
@@ -533,10 +537,11 @@ export const BudgetManager: React.FC<BudgetManagerProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+            <label htmlFor="budget-expense-notes" className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
               Notes & Contract Terms
             </label>
             <textarea
+              id="budget-expense-notes"
               rows={2}
               placeholder="e.g. 50% deposit required on booking, includes tip"
               value={newItem.notes}

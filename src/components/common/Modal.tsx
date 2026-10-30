@@ -59,14 +59,16 @@ export const Modal: React.FC<ModalProps> = ({
         className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden transform transition-all z-10 my-8`}
         role="dialog"
         aria-modal="true"
+        aria-labelledby="modal-title"
+        aria-describedby={description ? 'modal-description' : undefined}
       >
         <div className="flex items-center justify-between px-6 py-5 border-b border-slate-100 dark:border-slate-800">
           <div>
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+            <h3 id="modal-title" className="text-lg font-semibold text-slate-900 dark:text-slate-100">
               {title}
             </h3>
             {description && (
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              <p id="modal-description" className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 {description}
               </p>
             )}
