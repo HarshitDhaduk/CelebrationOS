@@ -10,6 +10,7 @@
  * - Authentic, dynamically computed heuristic simulation fallback with transparent engine badges
  */
 
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { EventProject, SuggestedAction } from '../types';
 import { calculateBudgetMetrics, formatCurrency } from '../utils/budgetEngine';
 import { detectPromptInjection, sanitizePromptInput } from '../lib/security';
@@ -22,6 +23,36 @@ export interface CopilotGenerationResult {
   suggestedActions?: SuggestedAction[];
   isLiveApi: boolean;
   engineBadge: string;
+}
+
+/**
+ * Instantiates the GoogleGenerativeAI client using the provided API key.
+ * Returns null if no key is supplied, enabling the heuristic fallback engine.
+ *
+ * @param apiKey - Optional Google Gemini API key.
+ * @returns GoogleGenerativeAI client instance or null.
+ */
+export function getGeminiClient(apiKey?: string): GoogleGenerativeAI | null {
+  if (!apiKey || !apiKey.trim()) {
+    return null;
+  }
+  return new GoogleGenerativeAI(apiKey.trim());
+}
+
+/**
+ * Generates an authentic, dynamically computed heuristic analysis for custom event data.
+ * Computes exact mathematical variances, category breakdown, cost-per-guest metrics,
+ * and pacing recommendations tailored specifically to user inputs.
+ *
+ * @param prompt - Sanitized user question.
+ * @param project - EventProject state.
+ * @returns Structured heuristic generation result.
+ */
+export function generateHeuristicAnalysis(
+  prompt: string,
+  project: EventProject
+): { text: string; suggestedActions?: SuggestedAction[] } {
+  return generateContextualSimulation(prompt, project);
 }
 
 /**
@@ -144,6 +175,25 @@ GUIDELINES:
 3. When answering schedule questions, consider setup buffers, guest transitions, and vendor breakdown time.
 4. Keep tone warm, celebratory, practical, and highly organized. Use markdown lists and bold text for clarity.`;
 
+  // 1. Attempt GoogleGenerativeAI SDK dispatch
+  const genAI = getGeminiClient(apiKey);
+  if (genAI) {
+    try {
+      const model = genAI.getGenerativeModel({
+        model: 'gemini-2.5-flash',
+        generationConfig: { temperature: 0.7, topP: 0.9, maxOutputTokens: 1200 },
+      });
+      const result = await model.generateContent(`${systemInstruction}\n\nUSER QUESTION: ${prompt}`);
+      const text = result.response.text();
+      if (text && text.trim().length > 0) {
+        const suggestedActions = detectSuggestedActions(prompt, project);
+        return { text, suggestedActions };
+      }
+    } catch {
+      // Fallback to direct REST endpoint below
+    }
+  }
+
   const requestBody = {
     contents: [
       {
@@ -158,7 +208,7 @@ GUIDELINES:
     },
   };
 
-  // Try gemini-2.5-flash first, fallback to gemini-1.5-flash
+  // 2. Direct REST endpoint fallback (gemini-2.5-flash, fallback to gemini-1.5-flash)
   let endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
   let response = await fetch(endpoint, {

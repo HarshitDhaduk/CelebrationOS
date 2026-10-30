@@ -80,6 +80,9 @@ graph TD
 - **`cache.ts`**: Memory LRU cache with configurable capacity and TTL expiration.
 - **`client-cache.ts`**: Browser sessionStorage cache and dual-tier caching orchestrator.
 - **`rate-limiter.ts`**: Sliding-window token bucket preventing denial-of-wallet and recursive API loops.
+- **`gemini.ts`**: Centralized GenAI service adapter integrating `@google/generative-ai` SDK, client initialization via `getGeminiClient()`, and transparent heuristic analysis fallback via `generateHeuristicAnalysis()`.
+- **`readability.ts`**: Linguistic readability analyzer calculating Flesch Reading Ease, Flesch-Kincaid Grade Level, and spoken delivery pacing (WPM) for speeches and announcements.
+- **`types.ts`**: Centralized domain model type definitions and schema interface re-exports.
 
 ---
 

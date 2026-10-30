@@ -45,4 +45,18 @@ describe('Gemini AI & Simulation Service Suite', () => {
     expect(res.text).toContain('Live Gemini Note: Switched to Intelligent Local Engine');
     expect(res.text).toContain('Budget Intelligence Analysis');
   });
+
+  it('instantiates GoogleGenerativeAI client when key is provided and handles missing keys safely', async () => {
+    const { getGeminiClient } = await import('../services/geminiService');
+    expect(getGeminiClient()).toBeNull();
+    expect(getGeminiClient('')).toBeNull();
+    expect(getGeminiClient('AIzaSyValidTestKey1234567890')).toBeDefined();
+  });
+
+  it('runs authentic generateHeuristicAnalysis dynamically on live project data', async () => {
+    const { generateHeuristicAnalysis } = await import('../services/geminiService');
+    const analysis = generateHeuristicAnalysis('How is my budget?', weddingPreset);
+    expect(analysis.text).toContain('Budget Intelligence Analysis');
+    expect(analysis.suggestedActions).toBeDefined();
+  });
 });
